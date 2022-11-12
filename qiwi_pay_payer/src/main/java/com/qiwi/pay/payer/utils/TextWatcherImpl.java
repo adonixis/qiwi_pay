@@ -1,9 +1,9 @@
-package com.qiwi.pay.payer;
+package com.qiwi.pay.payer.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 
-class TextWatcherImpl implements TextWatcher {
+public class TextWatcherImpl implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

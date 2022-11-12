@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">QIWI Pay Покупатель</string>
     <string name="hint_phone">Номер телефона</string>
+    <string name="btn_send">Отправить</string>
+
+    <string name="progress_loading">Загрузка…</string>
+    <string name="snackbar_action_hide">Скрыть</string>
+
+    <string name="error">Что-то пошло не так</string>
+    <string name="error_network">Проверьте ваше интернет-подключение</string>
+
 </resources>

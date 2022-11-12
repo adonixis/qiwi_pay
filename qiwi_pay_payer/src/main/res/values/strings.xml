@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">QIWI Pay Payer</string>
     <string name="hint_phone">Phone number</string>
+    <string name="btn_send">Send</string>
+
+    <string name="progress_loading">Loading…</string>
+    <string name="snackbar_action_hide">Hide</string>
+
+    <string name="error">Something wrong</string>
+    <string name="error_network">Check your internet connection</string>
 </resources>
