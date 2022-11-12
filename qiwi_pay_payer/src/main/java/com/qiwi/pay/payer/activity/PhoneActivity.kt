@@ -41,7 +41,7 @@ class PhoneActivity : AppCompatActivity() {
     private lateinit var siteId: String
     private lateinit var requestId: String
 
-    private val maskTextWatcher: TextWatcher = object : TextWatcherImpl() {
+    private val textWatcher: TextWatcher = object : TextWatcherImpl() {
         override fun afterTextChanged(s: Editable) {
             binding.btnSendPhone.isEnabled = s.length == PHONE_NUMBER_LENGTH
         }
@@ -119,6 +119,6 @@ class PhoneActivity : AppCompatActivity() {
         val formatWatcher = DescriptorFormatWatcher(MaskDescriptor.emptyMask().setTerminated(false))
         formatWatcher.installOn(binding.etPhone)
         formatWatcher.changeMask(maskDescriptor.setInitialValue(binding.etPhone.text.toString()))
-        binding.etPhone.addTextChangedListener(maskTextWatcher)
+        binding.etPhone.addTextChangedListener(textWatcher)
     }
 }

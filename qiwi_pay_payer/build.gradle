@@ -13,8 +13,6 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     viewBinding {
@@ -43,6 +41,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.activity:activity-ktx:1.5.1'
     implementation 'androidx.preference:preference-ktx:1.2.0'
 
     implementation 'ru.tinkoff.decoro:decoro:1.5.1'

@@ -11,7 +11,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.IntentCompat
 import com.qiwi.pay.payer.R
 import com.qiwi.pay.payer.databinding.ActivitySmsCodeBinding
 import com.qiwi.pay.payer.model.SmsCodeResponse
@@ -23,7 +22,6 @@ import com.qiwi.pay.payer.utils.Constants.STATUS_WAITING_SMS
 import com.qiwi.pay.payer.utils.TextWatcherImpl
 import com.qiwi.pay.payer.utils.showErrorSnackbar
 import com.qiwi.pay.payer.viewmodel.SmsCodeViewModel
-
 
 class SmsCodeActivity : AppCompatActivity() {
     companion object {
@@ -39,7 +37,7 @@ class SmsCodeActivity : AppCompatActivity() {
     private lateinit var siteId: String
     private lateinit var requestId: String
 
-    private val maskTextWatcher: TextWatcher = object : TextWatcherImpl() {
+    private val textWatcher: TextWatcher = object : TextWatcherImpl() {
         override fun afterTextChanged(s: Editable) {
             binding.btnSendSmsCode.isEnabled = s.length == SMS_CODE_LENGTH
         }
@@ -51,7 +49,7 @@ class SmsCodeActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.etSmsCode.addTextChangedListener(maskTextWatcher)
+        binding.etSmsCode.addTextChangedListener(textWatcher)
 
         settings = PreferenceManager.getDefaultSharedPreferences(this)
         editor = settings.edit()

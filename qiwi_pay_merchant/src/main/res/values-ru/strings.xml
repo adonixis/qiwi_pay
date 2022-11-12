@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">QIWI Pay Продавец</string>
+    <string name="hint_amount">Сумма платежа, руб.</string>
+    <string name="btn_accept_payment">Принять платеж</string>
+    <string name="scan_qr">Отсканируйте QR-код</string>
+    <string name="payment_success">Оплата прошла успешно</string>
+
+    <string name="progress_loading">Загрузка…</string>
+    <string name="snackbar_action_hide">Скрыть</string>
+
+    <string name="error">Что-то пошло не так</string>
+    <string name="error_network">Проверьте ваше интернет-подключение</string>
 </resources>

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">QIWI Pay Merchant</string>
+    <string name="hint_amount">Amount of payment, rub</string>
+    <string name="btn_accept_payment">Accept payment</string>
+    <string name="scan_qr">Scan QR code</string>
+    <string name="payment_success">Payment success</string>
+
+    <string name="progress_loading">Loading…</string>
+    <string name="snackbar_action_hide">Hide</string>
+
+    <string name="error">Something wrong</string>
+    <string name="error_network">Check your internet connection</string>
 </resources>

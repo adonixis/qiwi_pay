@@ -1,7 +1,7 @@
-package com.qiwi.pay.payer.network
+package com.qiwi.pay.merchant.network
 
-import com.qiwi.pay.payer.utils.Constants.AUTH_TOKEN
-import com.qiwi.pay.payer.utils.Constants.BASE_URL
+import com.qiwi.pay.merchant.utils.Constants.AUTH_TOKEN
+import com.qiwi.pay.merchant.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit

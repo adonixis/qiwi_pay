@@ -12,5 +12,19 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="materialButtonStyle">@style/Theme.QIWIPay.Button</item>
+    </style>
+
+    <style name="Theme.QIWIPay.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:buttonCornerRadius">100dp</item>
+        <item name="cornerRadius">100dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontWeight">400</item>
+        <item name="android:fontWeight">400</item>
+        <item name="android:textFontWeight">400</item>
     </style>
 </resources>
