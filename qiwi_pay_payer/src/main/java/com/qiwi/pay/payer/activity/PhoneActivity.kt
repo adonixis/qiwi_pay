@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.qiwi.pay.payer.R
@@ -35,7 +34,7 @@ class PhoneActivity : AppCompatActivity() {
 
     private val phoneViewModel: PhoneViewModel by viewModels()
     private lateinit var binding: ActivityPhoneBinding
-    private var progressDialog: ProgressDialog? = null
+    private lateinit var progressDialog: ProgressDialog
     private lateinit var settings: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     private lateinit var accountId: String
@@ -44,7 +43,7 @@ class PhoneActivity : AppCompatActivity() {
 
     private val maskTextWatcher: TextWatcher = object : TextWatcherImpl() {
         override fun afterTextChanged(s: Editable) {
-            binding.btnSend.isEnabled = s.length == PHONE_NUMBER_LENGTH
+            binding.btnSendPhone.isEnabled = s.length == PHONE_NUMBER_LENGTH
         }
     }
 
@@ -61,20 +60,20 @@ class PhoneActivity : AppCompatActivity() {
 
         initProgressDialog()
 
-        phoneViewModel.getPhoneLiveData().observe(this) { onLogin(it) }
-        phoneViewModel.getErrorLiveData().observe(this) { onLoginError(it) }
+        phoneViewModel.getPhoneLiveData().observe(this) { onSendPhone(it) }
+        phoneViewModel.getErrorLiveData().observe(this) { onSendPhoneError(it) }
 
         siteId = SITE_ID
 
-        binding.btnSend.setOnClickListener { login() }
+        binding.btnSendPhone.setOnClickListener { sendPhone() }
     }
 
-    private fun login() {
+    private fun sendPhone() {
         requestId = UUID.randomUUID().toString()
         val phone = binding.etPhone.text.toString().replace("[^\\d]".toRegex(), "")
         accountId = phone.hashCode().toString()
-        progressDialog!!.show()
-        binding.btnSend.isEnabled = false
+        progressDialog.show()
+        binding.btnSendPhone.isEnabled = false
         phoneViewModel.sendPhone(
             siteId = siteId,
             requestId = requestId,
@@ -83,36 +82,36 @@ class PhoneActivity : AppCompatActivity() {
         )
     }
 
-    private fun onLoginError(error: String) {
-        progressDialog!!.dismiss()
-        binding.btnSend.isEnabled = true
+    private fun onSendPhoneError(error: String) {
+        progressDialog.dismiss()
+        binding.btnSendPhone.isEnabled = true
         showErrorSnackbar(binding.root, error)
     }
 
-    private fun onLogin(phoneResponse: PhoneResponse?) {
-        progressDialog!!.dismiss()
-        binding.btnSend.isEnabled = true
-        if (phoneResponse!!.status.value == STATUS_WAITING_SMS ||
-            phoneResponse!!.status.value == STATUS_CREATED) {
+    private fun onSendPhone(phoneResponse: PhoneResponse?) {
+        progressDialog.dismiss()
+        binding.btnSendPhone.isEnabled = true
+        if (phoneResponse?.status?.value == STATUS_WAITING_SMS ||
+            phoneResponse?.status?.value == STATUS_CREATED) {
             editor.putString(ACCOUNT_ID_KEY, accountId)
             editor.apply()
             startSmsCodeActivity(requestId)
         } else {
-            onLoginError(getString(R.string.error))
+            onSendPhoneError(getString(R.string.error))
         }
     }
 
     private fun startSmsCodeActivity(requestId: String) {
-        //val intent = Intent(this, SmsCodeActivity::class.java)
-        //intent.putExtra(REQUEST_ID_KEY, requestId)
-        //startActivity(intent)
+        val intent = Intent(this, SmsCodeActivity::class.java)
+        intent.putExtra(REQUEST_ID_KEY, requestId)
+        startActivity(intent)
     }
 
     private fun initProgressDialog() {
         progressDialog = ProgressDialog(this)
-        progressDialog!!.isIndeterminate = true
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.setMessage(getString(R.string.progress_loading))
+        progressDialog.isIndeterminate = true
+        progressDialog.setCancelable(false)
+        progressDialog.setMessage(getString(R.string.progress_loading))
     }
 
     private fun installPhoneFormatter() {

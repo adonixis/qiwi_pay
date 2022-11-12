@@ -2,9 +2,9 @@ package com.qiwi.pay.payer.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PhoneResponse(
+data class SmsCodeRequest(
     @SerializedName("requestId")
     val requestId: String,
-    @SerializedName("status")
-    val status: Status
+    @SerializedName("smsCode")
+    val smsCode: String
 )

@@ -14,14 +14,6 @@
         >
 
         <activity
-            android:name=".activity.PhoneActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-
-        <activity
             android:name=".activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -32,6 +24,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.PhoneActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+
+        <activity
+            android:name=".activity.SmsCodeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
+            android:windowSoftInputMode="adjustResize">
         </activity>
 
     </application>

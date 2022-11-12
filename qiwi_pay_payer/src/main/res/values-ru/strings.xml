@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">QIWI Pay Покупатель</string>
     <string name="hint_phone">Номер телефона</string>
+    <string name="hint_sms_code">Код</string>
     <string name="btn_send">Отправить</string>
+    <string name="btn_confirm">Подтвердить</string>
 
     <string name="progress_loading">Загрузка…</string>
     <string name="snackbar_action_hide">Скрыть</string>

@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.qiwi.pay.payer.R
-import com.qiwi.pay.payer.model.PhoneRequest
-import com.qiwi.pay.payer.model.PhoneResponse
+import com.qiwi.pay.payer.model.SmsCodeRequest
+import com.qiwi.pay.payer.model.SmsCodeResponse
 import com.qiwi.pay.payer.network.ServiceFactory
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -15,17 +15,17 @@ import retrofit2.HttpException
 import java.net.UnknownHostException
 
 
-class PhoneViewModel(application: Application) : AndroidViewModel(application) {
+class SmsCodeViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
-        private const val TAG = "PhoneViewModel"
+        private const val TAG = "SmsCodeViewModel"
     }
 
-    private var phoneLiveData: MutableLiveData<PhoneResponse>? = null
+    private var smsCodeLiveData: MutableLiveData<SmsCodeResponse>? = null
     private var errorLiveData: MutableLiveData<String>? = null
 
-    fun getPhoneLiveData(): LiveData<PhoneResponse> {
-        phoneLiveData = MutableLiveData()
-        return phoneLiveData as MutableLiveData<PhoneResponse>
+    fun getSmsCodeLiveData(): LiveData<SmsCodeResponse> {
+        smsCodeLiveData = MutableLiveData()
+        return smsCodeLiveData as MutableLiveData<SmsCodeResponse>
     }
 
     fun getErrorLiveData(): LiveData<String> {
@@ -33,21 +33,20 @@ class PhoneViewModel(application: Application) : AndroidViewModel(application) {
         return errorLiveData as MutableLiveData<String>
     }
 
-    fun sendPhone(siteId: String, requestId: String, phone: String, accountId: String) {
-        val phoneRequest = PhoneRequest(
+    fun sendSmsCode(siteId: String, requestId: String, smsCode: String) {
+        val smsCodeRequest = SmsCodeRequest(
             requestId = requestId,
-            phone = phone,
-            accountId = accountId
+            smsCode = smsCode
         )
         val service = ServiceFactory.getQiwiService()
-        service!!.sendPhone(siteId, phoneRequest)
+        service!!.sendSmsCode(siteId, smsCodeRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::handleResult, this::handleError)
     }
 
-    private fun handleResult(phoneResponse: PhoneResponse) {
-        phoneLiveData!!.value = phoneResponse
+    private fun handleResult(smsCodeResponse: SmsCodeResponse) {
+        smsCodeLiveData!!.value = smsCodeResponse
     }
 
     private fun handleError(e: Throwable) {

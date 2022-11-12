@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
                 settings = PreferenceManager.getDefaultSharedPreferences(this)
                 paymentToken = settings.getString(PAYMENT_TOKEN_KEY, "")
             }
+
+            binding.tvToken.text = paymentToken
         }
     }
 
