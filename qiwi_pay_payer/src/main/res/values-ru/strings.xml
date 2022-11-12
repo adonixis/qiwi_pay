@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QIWI Pay Покупатель</string>
+    <string name="hint_phone">Номер телефона</string>
+</resources>
