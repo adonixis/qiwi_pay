@@ -6,14 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <ImageView
+        android:id="@+id/ivQr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvQr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="40dp"
+        android:adjustViewBounds="true"
+        />
+
     <TextView
-        android:id="@+id/tvToken"
+        android:id="@+id/tvQr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        app:layout_constraintTop_toBottomOf="@+id/ivQr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:text="@string/qr_code"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

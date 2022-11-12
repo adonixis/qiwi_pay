@@ -4,11 +4,11 @@
     <string name="hint_sms_code">Код</string>
     <string name="btn_send">Отправить</string>
     <string name="btn_confirm">Подтвердить</string>
+    <string name="qr_code">QR-код для оплаты</string>
 
     <string name="progress_loading">Загрузка…</string>
     <string name="snackbar_action_hide">Скрыть</string>
 
     <string name="error">Что-то пошло не так</string>
     <string name="error_network">Проверьте ваше интернет-подключение</string>
-
 </resources>
