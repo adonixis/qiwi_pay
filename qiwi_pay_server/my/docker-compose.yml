@@ -1,0 +1,29 @@
+version: "3.8"
+
+
+services:
+    django:
+        build: .
+        container_name: django
+        command: > 
+            sh -c "python manage.py makemigrations api &&
+                   python manage.py migrate &&
+                   python manage.py runserver 0.0.0.0:8000"
+        volumes:
+            - .:/usr/src/app
+        ports:
+            - "8000:8000"
+        depends_on:
+            - qiwi_db
+    qiwi_db:
+        image: postgres
+        container_name: qiwi_db
+        environment:
+        - POSTGRES_DB=qiwi_api_db
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=polkabulok56
+        expose:
+          - '5432'
+        ports:
+          - '5432:5432'
+
