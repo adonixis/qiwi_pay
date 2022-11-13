@@ -22,21 +22,29 @@ def hashing(password):
         hash_name='sha256', password=password, salt=salt, iterations=100000)
     return (hashed_password.hex())
 
+'''
+
+'''
+
+
 @csrf_exempt
 def token_create(request):
     info = json.loads(request.body)
     if sqlt(phone=info["phone"]).validatePhone() is False:
         sqlt(phone=info["phone"], requestid=info['requestId']).createUserbyPhone()
         accountid = sqlt(phone=info["phone"]).findAccountID()
-        new_json = {"requestid": info["requestId"],
+        url = f'https://api.qiwi.com/partner/payin-tokenization-api/v1/sites/sa3khn-00/token-requests'  # тут всё ок
+        headers = {"Authorization": "Bearer 74c4d440-fbce-4d13-8afa-198bc9619207"}
+        print(info["requestId"])
+        new_json = {"requestId": info["requestId"],
                     "phone": info["phone"],
                     "accountid": accountid
                     }
-        url = f'https://api.qiwi.com/partner/payin-tokenization-api/v1/sites/sa3khn-00/token-requests'  # тут всё ок
-        headers = {"Authorization": "Bearer 74c4d440-fbce-4d13-8afa-198bc9619207"}
-        print(f"NEW JSON: {new_json}")
-        new_json = json.dumps(new_json)
         api_answer = requests.post(url=url, json=new_json, headers=headers)
+        #{
+        #    "requestId": info["requestId"],
+        #    "phone": info["phone"],
+        #    "accountid": accountid}, headers=headers)
         api_answer = HttpResponse(api_answer).content.decode('utf-8')
         dict_api_answer = json.loads(api_answer)
         print(dict_api_answer)
@@ -73,17 +81,13 @@ def sms(request):
 @csrf_exempt
 def payment(request):
     info = json.loads(request.body)
-    currency = info['amount']['currency']
+    currency = str(info['amount']['currency'])
     value = info['amount']['value']
-    siteid = info['siteId']
     access_token = info['token']
-    refresh_token_and_accountId = sqlt(access_token=access_token).findTokenAndAccount()
-    print(refresh_token_and_accountId)
-    refresh_token = refresh_token_and_accountId[0]
-    accountid = str(refresh_token_and_accountId[1])
+    accountid = str(sqlt(access_token=access_token).getAccountByAccesToken())
+    refresh_token = sqlt(access_token=access_token).getRefreshByAccess()
     print(refresh_token)
     print(accountid)
-    paymentId = '5'
     new_json = {
                 "amount": {
                     "currency": currency,
@@ -97,8 +101,9 @@ def payment(request):
                         "account": accountid
                 }
                 }
-    url = f'https://api.qiwi.com/partner/payin/v1/sites/{siteid}/payments/{paymentId}'
+    print(f'NEW JSON: {new_json}')
+    url = 'https://api.qiwi.com/partner/payin/v1/sites/sa3khn-00/payments/123'
     headers = {"Authorization": "Bearer 74c4d440-fbce-4d13-8afa-198bc9619207"}
-    api_answer = requests.post(url=url, json=new_json, headers=headers)
+    api_answer = requests.put(url=url, json=new_json, headers=headers)
     print(api_answer)
     return HttpResponse(status=200)
